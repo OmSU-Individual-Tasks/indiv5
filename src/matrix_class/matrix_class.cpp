@@ -1,7 +1,10 @@
 #include "matrix_class.hpp"
 #include "../supp_func/supp_func.hpp"
 
-Matrix::Matrix(/* args */)
+#include <iomanip>
+#include <random>
+
+Matrix::Matrix()
 {
 }
 
@@ -27,9 +30,21 @@ void Matrix::fill()
 
     clearTerminal();
 
-    std::cout << "Enter the number of rows and columns: ";
-
-    int *rowCount = new int(intInput()), *colCount = new int(intInput());
+    while (true)
+    {
+        std::cout << "Enter the number of rows and columns: ";
+        std::cin >> rowCount >> colCount;
+        if (std::cin.good() and rowCount > 0 and colCount > 0)
+            break;
+        else
+        {
+            std::cerr << "The entered value is invalid." << std::endl
+                      << std::endl;
+            std::cin.clear();
+            while (std::cin.get() != '\n');
+            continue;
+        }
+    }
 
     switch (*option)
     {
@@ -39,7 +54,7 @@ void Matrix::fill()
                   << "Enter the elements of the matrix:" << std::endl
                   << std::endl;
 
-        for (int i = 0; i < (*colCount) * (*rowCount); i++)
+        for (int i = 0; i < (colCount) * (rowCount); i++)
             matrixElements.push_back(doubleInput());
 
         break;
@@ -47,7 +62,16 @@ void Matrix::fill()
         
     case 2:
     {
-        /* code */
+        std::cout << std::endl
+                  << "Enter the range of element values: ";
+        double minValue = doubleInput(), maxValue = doubleInput();
+
+        std::uniform_real_distribution<double> unif(minValue, maxValue);
+        std::default_random_engine re;
+
+        for (int i = 0; i < (colCount) * (rowCount); i++)
+            matrixElements.push_back(unif(re));
+
         break;
     }
 
@@ -71,4 +95,15 @@ void Matrix::fill()
     }
 
     delete option;
+}
+
+void Matrix::show()
+{
+    for (int i = 0; i < rowCount; i++)
+    {
+        for (int j = 0; j < colCount; j++)
+            std::cout << std::setw(10)
+                      << matrixElements[j + (i * colCount)] << " ";
+        std::cout << std::endl;
+    }
 }

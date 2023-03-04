@@ -8,6 +8,9 @@ class Matrix
 {
 private:
     std::vector<double> matrixElements;
+    int rowCount = 0;
+    int colCount = 0;
+    int status;
 
 public:
     Matrix();
@@ -15,6 +18,7 @@ public:
 
     int numbOfElements();
     void fill();
+    void show();
 };
 
 #endif

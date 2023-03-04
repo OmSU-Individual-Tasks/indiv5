@@ -1,11 +1,14 @@
 #include <iostream>
 #include "matrix_class/matrix_class.hpp"
+#include "supp_func/supp_func.hpp"
 
 int main()
 {
-    Matrix test;
+    Matrix matrix;
 
-    test.fill();
+    matrix.fill();
+    matrix.show();
 
+    pauseTerminal();
     return 0;
 }
