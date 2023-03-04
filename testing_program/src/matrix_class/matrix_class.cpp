@@ -30,21 +30,7 @@ void Matrix::fill()
 
     clearTerminal();
 
-    while (true)
-    {
-        std::cout << "Enter the number of rows and columns: ";
-        std::cin >> rowCount >> colCount;
-        if (std::cin.good() and rowCount > 0 and colCount > 0)
-            break;
-        else
-        {
-            std::cerr << "The entered value is invalid." << std::endl
-                      << std::endl;
-            std::cin.clear();
-            while (std::cin.get() != '\n');
-            continue;
-        }
-    }
+    enterCountOfRowsAndColumns(rowCount, colCount);
 
     switch (*option)
     {

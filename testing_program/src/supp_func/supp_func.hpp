@@ -9,5 +9,6 @@ void pauseTerminal();
 int optionInput(int);
 int intInput();
 double doubleInput();
+void enterCountOfRowsAndColumns(int &, int &);
 
 #endif
